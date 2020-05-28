@@ -1,0 +1,15 @@
+<nb-card
+  [nbSpinner]="!isClientsLoaded"
+  nbSpinnerStatus="info"
+>
+<sp-smart-table
+  [smartTitle]="tableTitle"
+  [smartColumns]="tableColumns"
+  [smartRows]="clientList"
+
+  (create)="onCreateClient($event)"
+  (about)="onAboutClient($event)"
+  (edit)="onUpdateClient($event)"
+  (delete)="onDeleteClient($event)"
+></sp-smart-table>
+</nb-card>

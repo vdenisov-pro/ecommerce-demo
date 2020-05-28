@@ -1,0 +1,20 @@
+const path = require('path');
+const config = require('config');
+
+const {
+  username: DB_USER,
+  password: DB_PASSWORD,
+  host: DB_HOST,
+  port: DB_PORT,
+  database: DB_NAME
+} = config.get('sequelize');
+
+const DB_STRING = `postgres://${ DB_USER }:${ DB_PASSWORD }@${ DB_HOST }:${ DB_PORT }/${ DB_NAME }`
+
+module.exports = {
+  'models-path':     path.resolve('db', 'schemas'),
+  'migrations-path': path.resolve('db', 'migrations'),
+
+  config: __filename,
+  url: DB_STRING
+}

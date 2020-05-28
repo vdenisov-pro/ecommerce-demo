@@ -1,0 +1,9 @@
+[2019-10-07T20:33:58.298] [INFO] firebase - * firebase -> (appConfig).projectId = "sweetpay-admin-dev"
+[2019-10-07T20:33:58.301] [INFO] firebase - * firebase -> (accountKey).project_id = "sweetpay-admin-dev"
+[2019-10-07T20:34:09.657] [INFO] bin-www - 
+ ===> "development" mode <=== 
+
+[2019-10-07T20:34:09.658] [INFO] bin-www - * app => listening on port 3000!
+[2019-10-07T20:34:09.658] [INFO] bin-www - * database => postgres://lgnsxpee:******@balarama.db.elephantsql.com:5432/lgnsxpee
+[2019-10-07T20:34:14.834] [INFO] bin-www - 
+ => job "init root user" completed !

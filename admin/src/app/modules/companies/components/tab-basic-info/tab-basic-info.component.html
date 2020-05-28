@@ -1,0 +1,72 @@
+<form [formGroup]="basicForm">
+  <div class="row">
+
+    <!-- name -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Название</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Введите название компании"
+          class="form-control"
+          formControlName="name"
+          [status]="getClassForControl(name)"
+          (blur)="onBlur(name)"
+          (focus)="onFocus(name)"
+        />
+      </div>
+    </div>
+
+    <!-- manager -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Менеджер</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Выберите менеджера"
+          class="form-control"
+          formControlName="manager"
+          [status]="getClassForControl(manager)"
+          [spAutocomplete]="ManagerAutocomplete"
+          (blur)="onBlur(manager)"
+          (focus)="onFocus(manager)"
+          (click)="onManagerInputClick()"
+        />
+
+        <sp-autocomplete
+          #ManagerAutocomplete="spAutocomplete"
+          [sourceList]="managerList"
+          (selectOption)="selectManager($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<hr *ngIf="!isActionDetails"/>
+
+<div *ngIf="!isActionDetails" class="d-flex justify-content-around">
+
+  <button
+    nbButton
+    ghost
+    status="success"
+    [disabled]="!basicForm.valid"
+    (click)="saveBasicForm()">
+      {{ successButtonText }}
+  </button>
+
+  <button
+    nbButton
+    ghost
+    status="danger"
+    (click)="cancel()">
+      Отменить
+  </button>
+
+</div>

@@ -1,0 +1,15 @@
+<nb-card
+  [nbSpinner]="!isManagersLoaded"
+  nbSpinnerStatus="info"
+>
+<sp-smart-table
+  [smartTitle]="tableTitle"
+  [smartColumns]="tableColumns"
+  [smartRows]="managerList"
+
+  (create)="onCreateManager($event)"
+  (about)="onAboutManager($event)"
+  (edit)="onUpdateManager($event)"
+  (delete)="onDeleteManager($event)"
+></sp-smart-table>
+</nb-card>

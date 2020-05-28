@@ -1,0 +1,6 @@
+# GITIGNORE for project "sweetpay"
+
+# VScode settings
+.vscode
+.idea
+node_modules

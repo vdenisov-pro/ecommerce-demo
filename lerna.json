@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "admin",
+    "server"
+  ],
+  "version": "0.0.0"
+}

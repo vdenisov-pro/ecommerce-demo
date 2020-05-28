@@ -1,0 +1,45 @@
+<nb-card *ngIf="!!clientForm">
+  <nb-card-header>
+    {{ modalTitle }}
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="clientForm">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Клиент</label>
+          <input
+            type="text"
+            nbInput
+            placeholder="Выберите клиента"
+            class="form-control"
+            formControlName="name"
+            [status]="getClassForControl(name)"
+            (blur)="onBlur(name)"
+            (focus)="onFocus(name)"
+          />
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <button
+      nbButton
+      ghost
+      status="success"
+      [disabled]="!clientForm.valid"
+      (click)="saveClientForm()">
+        {{ successButtonText }}
+    </button>
+
+    <button
+      nbButton
+      ghost
+      status="danger"
+      (click)="cancel()">
+        Отменить
+    </button>
+  </nb-card-footer>
+
+</nb-card>

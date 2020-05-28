@@ -1,0 +1,20 @@
+{
+  "name": "API for application \"sweetpay\"",
+  "version": "0.0.1",
+  "description": "Docs for other developers",
+  "template": {
+    "forceLanguage": "en"
+  },
+  "order": [
+    "Type",
+    "Auth",
+    "User",
+    "Company",
+    "Category",
+    "Product",
+    "Image",
+    "Address",
+    "Order",
+    "Firebase"
+  ]
+}

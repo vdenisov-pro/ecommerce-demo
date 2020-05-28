@@ -1,0 +1,27 @@
+<nb-card size="xlarge">
+    <nb-card-body size="xlarge">
+
+        <nb-tabset>
+
+            <nb-tab tabTitle="Информация о блюде">
+                <sp-product-modal-actions
+                  [action]="action"
+                  [source]="source"
+
+                  (eventCancel)="cancel($event)"
+                  (eventCreate)="createProduct($event)"
+                  (eventUpdate)="updateProduct($event)">
+                </sp-product-modal-actions>
+            </nb-tab>
+
+            <nb-tab tabTitle="Загрузка картинок" *ngIf="action !== 'details'" [disabled]="!productId">
+                <sp-product-modal-images [uploader]="uploader" [productId]="productId"></sp-product-modal-images>
+            </nb-tab>
+
+            <nb-tab tabTitle="Просмотр картинок" *ngIf="action !== 'create'">
+                <sp-product-modal-preview [action]="action" [source]="source"></sp-product-modal-preview>
+            </nb-tab>
+
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

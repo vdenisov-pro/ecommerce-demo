@@ -1,0 +1,131 @@
+<nb-card size="small">
+
+  <!-- HEADER -->
+  <nb-card-header>
+    Добавление продукта в заказ
+  </nb-card-header>
+
+  <!-- BODY -->
+  <nb-card-body>
+    <form [formGroup]="positionForm" *ngIf="!!positionForm">
+
+      <div class="row">
+
+        <!-- product -->
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Продукт</label>
+
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              formControlName="product"
+              placeholder="Выберите продукт"
+              [status]="getClassForControl(product)"
+              [spAutocomplete]="ProductAutocomplete"
+              (blur)="onBlur(product)"
+              (focus)="onFocus(product)"
+              (click)="onProductInputClick()"
+            />
+
+            <sp-autocomplete
+              #ProductAutocomplete="spAutocomplete"
+              [sourceList]="productList"
+              (selectOption)="selectProduct($event)"
+            ></sp-autocomplete>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row d-flex align-items-center">
+
+        <!-- price -->
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Цена</label>
+
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              placeholder="поле заблокировано"
+              formControlName="productPrice"
+            />
+          </div>
+        </div>
+
+        <div class="col-sm-1 text-center">
+          <span class="arithmetic">x</span>
+        </div>
+
+        <!-- product number -->
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label>Количество</label>
+
+            <input
+              type="number"
+              min="1"
+              nbInput
+              fullWidth
+              formControlName="productNumber"
+              placeholder="Количество"
+              [status]="getClassForControl(productNumber)"
+              (blur)="onBlur(productNumber)"
+              (focus)="onFocus(productNumber)"
+              (change)="changeItemPrice()"
+            />
+          </div>
+        </div>
+
+        <div class="col-sm-1 text-center">
+          <span class="arithmetic">=</span>
+        </div>
+
+        <!-- price -->
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Стоимость</label>
+
+            <input
+              type="number"
+              nbInput
+              fullWidth
+              placeholder="поле заблокировано"
+              formControlName="itemPrice"
+            />
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </nb-card-body>
+
+  <!-- FOOTER -->
+  <nb-card-footer *ngIf="!isActionDetails">
+    <div class="d-flex justify-content-around">
+
+      <button
+        nbButton
+        ghost
+        status="success"
+        (click)=savePositionForm()
+        [disabled]="!positionForm.valid">
+          {{ successButtonText }}
+      </button>
+  
+      <button
+        nbButton
+        ghost
+        status="danger"
+        (click)=cancel()>
+          Отмена
+      </button>
+
+    </div>
+  </nb-card-footer>
+
+</nb-card>

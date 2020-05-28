@@ -1,0 +1,12 @@
+<nb-card [nbSpinner]="!isCompaniesLoaded" nbSpinnerStatus="info">
+  <sp-smart-table
+    [smartTitle]="tableTitle"
+    [smartColumns]="tableColumns"
+    [smartRows]="companiesList"
+
+    (create)="onCreateCompany($event)"
+    (about)="onAboutCompany($event)"
+    (edit)="onUpdateCompany($event)"
+    (delete)="onDeleteCompany($event)"
+  ></sp-smart-table>
+</nb-card>

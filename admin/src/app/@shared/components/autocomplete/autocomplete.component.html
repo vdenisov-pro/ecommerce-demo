@@ -1,0 +1,24 @@
+<ng-template #root>
+  <div class="autocomplete">
+
+    <ng-container *ngIf="sourceList?.length">
+      <sp-autocomplete-option *ngFor="let option of sourceList"
+        [value]="option.name" (click)="onOptionSelect(option)">
+          {{ option.name }}
+      </sp-autocomplete-option>
+    </ng-container>
+
+    <ng-container *ngIf="sourceList && !sourceList?.length">
+      <sp-autocomplete-option>
+        Нет результатов
+      </sp-autocomplete-option>
+    </ng-container>
+
+    <ng-container *ngIf="!sourceList">
+      <sp-autocomplete-option>
+        Загрузка...
+      </sp-autocomplete-option>
+    </ng-container>
+
+  </div>
+</ng-template>

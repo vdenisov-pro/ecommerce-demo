@@ -1,0 +1,230 @@
+<nb-card size="medium" [formGroup]="clientForm" *ngIf="!!clientForm">
+
+  <!-- HEADER -->
+  <nb-card-header>
+
+    <div class="row">
+      
+      <!-- title -->
+      <div class="col-sm-6">
+        <span>
+          {{ modalTitle }}
+        </span>
+      </div>
+
+      <!-- status -->
+      <div class="col-sm-6">
+        <nb-select
+          fullWidth
+          formControlName="status"
+          placeholder="Выберите статус"
+          [status]="getClassForControl(status)"
+          (blur)="onBlur(status)"
+          (focus)="onFocus(status)"
+        >
+          <nb-option *ngFor="let clientState of clientStates" [value]="clientState.key">
+            {{ clientState.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+
+    </div>
+
+  </nb-card-header>
+
+  <!-- BODY -->
+  <nb-card-body>
+
+    <div class="row">
+
+      <!-- company -->
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Название компании</label>
+
+          <input
+            type="text"
+            nbInput
+            placeholder="Выберите компанию"
+            class="form-control"
+            formControlName="company"
+            [status]="getClassForControl(company)"
+            [spAutocomplete]="CompanyAutocomplete"
+            (blur)="onBlur(company)"
+            (focus)="onFocus(company)"
+            (click)="onCompanyInputClick()"
+          />
+
+          <sp-autocomplete
+            #CompanyAutocomplete="spAutocomplete"
+            [sourceList]="companyList"
+            (selectOption)="_selectCompany($event)"
+          ></sp-autocomplete>
+        </div>
+      </div>
+
+      <!-- name -->
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Имя клиента</label>
+
+          <input
+            type="text"
+            nbInput
+            placeholder="Введите имя клиента"
+            class="form-control"
+            formControlName="name"
+            [status]="getClassForControl(name)"
+            (blur)="onBlur(name)"
+            (focus)="onFocus(name)">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <!-- email -->
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Адрес почты</label>
+
+          <input
+            type="email"
+            nbInput
+            placeholder="Введите адрес почты"
+            class="form-control"
+            formControlName="email"
+            [status]="getClassForControl(email)"
+            (blur)="onBlur(email)"
+            (focus)="onFocus(email)"
+          />
+        </div>
+      </div>
+
+      <!-- phone -->
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Номер телефона</label>
+
+          <input
+            type="text"
+            nbInput
+            placeholder="Введите номер телефона"
+            class="form-control"
+            formControlName="phone"
+            [status]="getClassForControl(phone)"
+            (blur)="onBlur(phone)"
+            (focus)="onFocus(phone)"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <!-- password -->
+      <div class="col-sm-6" *ngIf="action === 'create'">
+        <div class="form-group">
+          <label>Пароль входа</label>
+
+          <input
+            type="text"
+            nbInput
+            placeholder="Введите пароль входа"
+            class="form-control"
+            formControlName="password"
+            [status]="getClassForControl(password)"
+            (blur)="onBlur(password)"
+            (focus)="onFocus(password)">
+        </div>
+      </div>
+
+      <!-- manager -->
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Менеджер</label>
+
+          <input
+            type="text"
+            nbInput
+            placeholder="Выберите менеджера от SweetPay"
+            class="form-control"
+            formControlName="manager"
+            [status]="getClassForControl(manager)"
+            [spAutocomplete]="ManagerAutocomplete"
+            (blur)="onBlur(manager)"
+            (focus)="onFocus(manager)"
+            (click)="onManagerInputClick()"
+          />
+
+          <sp-autocomplete
+            #ManagerAutocomplete="spAutocomplete"
+            [sourceList]="managerList"
+            (selectOption)="_selectManager($event)"
+          ></sp-autocomplete>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <!-- description -->
+      <div class="col-12">
+        <div class="form-group">
+          <label>Описание</label>
+
+          <textarea
+            nbInput
+            fullWidth
+            formControlName="description"
+            class="form-control"
+            placeholder="Дополнительная информация о клиенте"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-12" *ngIf="action === 'update'">
+        <div class="form-group">
+          <button
+            nbButton
+            fullWidth
+            (click)="sendPasswordResetEmail()"
+            [disabled]="resetPasswordButtonDisabled"
+          >
+            Сбросить пароль
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+  <!-- FOOTER -->
+  <nb-card-footer *ngIf="action !== 'details'">
+    <div class="d-flex justify-content-around">
+
+      <button
+        nbButton
+        ghost
+        status="success"
+        [disabled]="!clientForm.valid"
+        (click)="saveClientForm()">
+          {{ successButtonText }}
+      </button>
+
+      <button
+        nbButton
+        ghost
+        status="danger"
+        (click)="cancel()">
+          Отмена
+      </button>
+
+    </div>
+  </nb-card-footer>
+
+</nb-card>

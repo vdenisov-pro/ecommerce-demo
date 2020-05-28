@@ -1,0 +1,41 @@
+<button *ngIf="!isActionDetails"
+  nbButton
+  ghost
+  status="info"
+  class="d-block mx-auto"
+  (click)="addAddress()"
+>
+  Добавить адресс
+</button>
+
+<!-- [smartRows]="addressList" -->
+<!-- (edit)="editAddress($event)" -->
+
+<sp-smart-table
+  [smartTitle]="tableTitle"
+  [settings]="tableSettings"
+  [smartColumns]="tableColumns"
+  [smartRows]="source"
+
+  (delete)="deleteAddress($event)"
+></sp-smart-table>
+
+<div *ngIf="!isActionDetails" class="d-flex justify-content-around">
+  <button
+    nbButton
+    ghost
+    status="success"
+    (click)="saveChanges()"
+  >
+    Сохранить изменения
+  </button>
+
+  <button
+    nbButton
+    ghost
+    status="danger"
+    (click)="cancel()"
+  >
+    Отменить
+  </button>
+</div>

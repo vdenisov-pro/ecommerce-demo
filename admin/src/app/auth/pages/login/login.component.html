@@ -1,0 +1,66 @@
+<h1 id="title" class="title">Форма авторизации</h1>
+
+<form (ngSubmit)="onLogin()"
+      #form="ngForm"
+      aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">Адрес почты:</label>
+    <input nbInput
+           type="text"
+           placeholder="Введите адрес почты"
+
+           id="input-email"
+           #email="ngModel"
+           name="email"
+           [(ngModel)]="user.email"
+
+           fullWidth
+           autofocus
+           fieldSize="large"
+           pattern=".+@.+\..+"
+
+           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+           [attr.aria-invalid]="email.invalid && email.touched ? true : null">
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-password">Пароль:</label>
+    <input nbInput
+           type="password"
+           placeholder="Введите пароль"
+
+           id="input-password"
+           #password="ngModel"
+           name="password"
+           [(ngModel)]="user.password"
+
+           fullWidth
+           autofocus
+           fieldSize="large"
+
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
+           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="primary"
+          size="large"
+          [disabled]="submitted || !form.valid"
+          [class.btn-pulse]="submitted">
+    Войти
+  </button>
+
+  <div class="social-auth">
+
+    <button type="button facebook" (click)="authFacebook()">
+      Facebook
+    </button>
+
+    <button type="button google" (click)="authGoogle()">
+      Google
+    </button>
+
+  </div>
+</form>

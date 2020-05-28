@@ -1,0 +1,265 @@
+<form [formGroup]="productForm">
+
+  <div class="row">
+
+    <!-- name -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Название</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Введите название для блюда"
+          class="form-control"
+          formControlName="name"
+          [status]="getClassForControl(name)"
+          (blur)="onBlur(name)"
+          (focus)="onFocus(name)"
+        />
+      </div>
+    </div>
+
+    <!-- boxType -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Тип коробки (коробка / упаковка)</label>
+
+        <nb-select
+          class="d-block"
+          placeholder="Выберите тип коробки"
+          formControlName="boxType"
+          [status]="getClassForControl(boxType)"
+          (blur)="onBlur(boxType)"
+          (focus)="onFocus(boxType)"
+        >
+          <nb-option *ngFor="let title of ProductBoxTitles" [value]="title.key">
+            {{ title.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- portionPrice -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Цена за порцию(единицу), тг</label>
+
+        <input
+          type="number"
+          nbInput
+          class="form-control"
+          formControlName="portionPrice"
+          [status]="getClassForControl(portionPrice)"
+          (blur)="onBlur(portionPrice)"
+          (focus)="onFocus(portionPrice)"
+          min="0"
+          placeholder="0"
+        />
+      </div>
+    </div>
+
+    <!-- boxPrice -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Цена за коробку(упаковку), тг</label>
+
+        <input
+          type="number"
+          nbInput
+          class="form-control"
+          formControlName="boxPrice"
+          [status]="getClassForControl(boxPrice)"
+          (blur)="onBlur(boxPrice)"
+          (focus)="onFocus(boxPrice)"
+          min="0"
+          placeholder="0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- portionWeight -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Вес порции (единицы), грамм </label>
+
+        <input
+          type="number"
+          nbInput
+          class="form-control"
+          formControlName="portionWeight"
+          [status]="getClassForControl(portionWeight)"
+          (blur)="onBlur(portionWeight)"
+          (focus)="onFocus(portionWeight)"
+          placeholder="0"
+          min="0"
+          max="999"
+        />
+      </div>
+    </div>
+
+    <!-- boxWeight -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Вес коробки(упаковки), грамм </label>
+
+        <input
+          type="number"
+          nbInput
+          class="form-control"
+          formControlName="boxWeight"
+          [status]="getClassForControl(boxWeight)"
+          (blur)="onBlur(boxWeight)"
+          (focus)="onFocus(boxWeight)"
+          placeholder="0"
+          min="0"
+          max="999"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- portionNumber -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Количество порций</label>
+
+        <input
+          type="number"
+          nbInput
+          class="form-control"
+          formControlName="portionNumber"
+          [status]="getClassForControl(portionNumber)"
+          (blur)="onBlur(portionNumber)"
+          (focus)="onFocus(portionNumber)"
+          placeholder="0"
+          min="0"
+          max="999"
+        />
+      </div>
+    </div>
+
+    <!-- description -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Описание</label>
+
+        <textarea
+          class="form-control"
+          nbInput
+          placeholder="Введите описание для блюда"
+          formControlName="description"
+          [status]="getClassForControl(description)"
+          (blur)="onBlur(description)"
+          (focus)="onFocus(description)"
+        ></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <div class="row">
+
+    <!-- producer -->
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Производитель</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Производитель"
+          class="form-control"
+          formControlName="producer"
+          [status]="getClassForControl(producer)"
+          (blur)="onBlur(producer)"
+          (focus)="onFocus(producer)"
+        />
+      </div>
+    </div>
+
+    <!-- producerCountry -->
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Страна</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Выберите страну"
+          class="form-control"
+          formControlName="producerCountry"
+          [status]="getClassForControl(producerCountry)"
+          [spAutocomplete]="CountryAutocomplete"
+          (blur)="onBlur(producerCountry)"
+          (focus)="onFocus(producerCountry)"
+          (click)="onCountryInputClick()"
+        />
+
+        <sp-autocomplete
+          #CountryAutocomplete="spAutocomplete"
+          [sourceList]="countryList"
+          (selectOption)="selectCountry($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+
+    <!-- code -->
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Код товара</label>
+
+        <input
+          type="text"
+          nbInput
+          placeholder="Код товара"
+          formControlName="code"
+          [status]="getClassForControl(code)"
+          (blur)="onBlur(code)"
+          (focus)="onFocus(code)"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+<!-- TODO: use <nb-card-footer> -->
+
+<hr *ngIf="action !== 'details'">
+
+<div
+  *ngIf="action !== 'details'"
+  class="d-flex justify-content-around">
+
+  <button
+    nbButton
+    ghost
+    status="success"
+    [disabled]="!productForm.valid"
+    (click)="saveProductForm()">
+      {{ successButtonText }}
+  </button>
+
+  <button
+    nbButton
+    ghost
+    status="danger"
+    (click)="cancel()">
+      Отменить
+  </button>
+</div>

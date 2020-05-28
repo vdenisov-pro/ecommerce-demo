@@ -1,0 +1,28 @@
+.status {
+  border-radius: 3px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100px;
+  height: 20px;
+
+  &.new {
+    background: #8BD5FF;
+  }
+  &.verified {
+    background: #ffc0cb;
+  }
+  &.shipped {
+    background: #0500FF;
+  }
+  &.delivering {
+    background: #FFB800;
+  }
+  &.completed{
+    background: #2ED47A;
+  }
+  &.cancelled{
+    background: #EB5757;
+  }
+}

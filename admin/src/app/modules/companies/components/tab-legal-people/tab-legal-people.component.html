@@ -1,0 +1,40 @@
+<button *ngIf="!isActionDetails"
+  nbButton
+  ghost
+  status="info"
+  class="d-block mx-auto"
+  (click)="addLegalPerson()">
+    Добавить юр.лицо
+</button>
+
+<!-- [smartRows]="legalPersonList" -->
+<!-- (edit)="editLegalPerson($event)" -->
+
+<sp-smart-table
+  [smartTitle]="tableTitle"
+  [settings]="tableSettings"
+  [smartColumns]="tableColumns"
+  [smartRows]="source"
+
+  (delete)="deleteLegalPerson($event)"
+></sp-smart-table>
+
+<div *ngIf="!isActionDetails" class="d-flex justify-content-around">
+  <button
+    nbButton
+    ghost
+    status="success"
+    (click)="saveChanges()"
+  >
+    Сохранить изменения
+  </button>
+
+  <button
+    nbButton
+    ghost
+    status="danger"
+    (click)="cancel()"
+  >
+    Отменить
+  </button>
+</div>

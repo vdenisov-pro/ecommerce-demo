@@ -1,0 +1,20 @@
+# GITIGNORE for app "server"
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+/node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.bash_history
+
+# API documentation
+/docs
+
+# Environment
+local.js
+my-local.js

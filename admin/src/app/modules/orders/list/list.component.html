@@ -1,0 +1,12 @@
+<nb-card [nbSpinner]="!isOrdersLoaded" nbSpinnerStatus="info">
+  <sp-smart-table
+    [smartTitle]="tableTitle"
+    [smartColumns]="tableColumns"
+    [smartRows]="ordersList"
+    
+    (create)="onCreateOrder($event)"
+    (about)="onAboutOrder($event)"
+    (edit)="onUpdateOrder($event)"
+    (delete)="onCancelOrder($event)"
+  ></sp-smart-table>
+</nb-card>

@@ -1,0 +1,33 @@
+<nb-card>
+  <nb-card-header>
+    Подтверждение действия
+  </nb-card-header>
+
+  <nb-card-body>
+    Вы уверены, что хотите отменить заказ ?
+  </nb-card-body>
+
+  <hr/>
+
+  <nb-card-footer>
+
+    <div class="d-flex justify-content-around">
+      <button
+        nbButton
+        ghost
+        status="success"
+        (click)="submit()">
+          Да
+      </button>
+
+      <button
+        nbButton
+        ghost
+        status="danger"
+        (click)="cancel()">
+          Нет
+      </button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>

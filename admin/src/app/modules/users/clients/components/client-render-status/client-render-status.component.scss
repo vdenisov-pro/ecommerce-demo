@@ -1,0 +1,20 @@
+.status {
+  border-radius: 3px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  width: 130px;
+  height: 20px;
+
+  &.new{
+    background: #C4C4C4;
+  }
+  &.active{
+    background: #23D160;
+  }
+  &.notactive{
+    background: #EB5757;
+  }
+
+}

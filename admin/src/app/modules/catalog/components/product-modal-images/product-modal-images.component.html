@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-around">
+  <!-- *ngIf="!uploader?.queue?.length" -->
+  <button
+    class="main-button"
+    nbButton
+    outline
+    status="primary"
+    (click)="inputFile.click()"
+  >
+    Выбрать картинки
+  </button>
+  
+  <button
+    *ngIf="uploader?.queue?.length"
+    class="main-button"
+    nbButton
+    outline
+    status="success"
+    (click)="uploader.uploadAll()"
+  >
+    Загрузить все
+  </button>
+</div>
+
+<input
+  #inputFile
+  type="file"
+  ng2FileSelect
+  [uploader]="uploader"
+  (change)="updateUrlForUploader()"
+  multiple
+  hidden
+/>
+
+<div class="col-md-12">
+  <div class="progress-area">
+    <p>Выбрано: {{ uploader?.queue?.length }}</p>
+    <div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Статус</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of uploader.queue">
+        <!-- NAME -->
+        <td>
+          {{ item?.file?.name }}
+        </td>
+
+        <!-- STATUS -->
+        <td>
+
+          <!-- ready -->
+          <span *ngIf="!item.isReady && !item.isSuccess && !item.isError" style="color: gray">
+            <b>ОЖИДАНИИЕ</b>
+          </span>
+
+          <!-- uploading -->
+          <span *ngIf="item.isReady" style="color: orange">
+            <b>ЗАГРУЗКА</b>
+          </span>
+
+          <!-- success -->
+          <span *ngIf="item.isSuccess" style="color: green">
+            <b>УСПЕШНО</b>
+          </span>
+     
+          <!-- error -->
+          <span *ngIf="item.isError" style="color: red">
+            <b>ОШИБКА</b>
+          </span>
+
+        </td>
+
+        <!-- ACTIONS -->
+        <td>
+
+          <!-- upload -->
+          <button
+            nbButton
+            ghost
+            class="button-action"
+            [disabled]="item.isReady || item.isUploading || item.isSuccess"
+          >
+            <nb-icon
+              status="success"
+              class="icon-action"
+              (click)="item.upload()"
+              icon="cloud-upload-outline"
+            ></nb-icon>
+          </button>
+
+          <!-- remove -->
+          <button
+            nbButton
+            ghost
+            class="button-action"
+            [disabled]="item.isReady || item.isUploading || item.isSuccess"
+          >
+            <nb-icon
+              status="danger"
+              class="icon-action"
+              (click)="item.remove()"
+              icon="trash-2-outline"
+            ></nb-icon>
+          </button>
+
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

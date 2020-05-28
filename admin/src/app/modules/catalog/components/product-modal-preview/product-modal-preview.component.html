@@ -1,0 +1,25 @@
+<ng-template
+  *ngIf="source.images && source.images.length; then showImages; else noImages">
+</ng-template>
+
+<ng-template #showImages>
+  <div class="images-area">
+    <div class="image-container" *ngFor="let image of source.images">
+      <img src="{{ image.small }}" alt="картинка продукта">
+
+      <nb-icon *ngIf="action !== 'details'"
+        class="icon-delete"
+        icon="trash-2-outline"
+        (click)="deleteImage(image.id)"
+      ></nb-icon>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noImages>
+  <div class="images-area">
+    <p>
+      У этого продукта нет картинок
+    </p>
+  </div>
+</ng-template>

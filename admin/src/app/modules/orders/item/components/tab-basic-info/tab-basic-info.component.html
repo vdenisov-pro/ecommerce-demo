@@ -1,0 +1,335 @@
+<form [formGroup]="orderForm" *ngIf="!!orderForm"
+[nbSpinner]="isSpinnerAvailable && !source">
+  <div class="row">
+
+    <!-- company -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Компания</label>
+
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Выберите компанию"
+          class="form-control"
+          formControlName="company"
+          [status]="getClassForControl(company)"
+          [spAutocomplete]="CompanyAutocomplete"
+          (blur)="onBlur(company)"
+          (focus)="onFocus(company)"
+          (click)="onCompanyInputClick()"
+        />
+
+        <sp-autocomplete
+          #CompanyAutocomplete="spAutocomplete"
+          [sourceList]="companyList"
+          (selectOption)="selectCompany($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+
+    <!-- legal person -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Юридическое лицо</label>
+
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Выберите юр.лицо"
+          class="form-control"
+          formControlName="legalPerson"
+          [status]="getClassForControl(legalPerson)"
+          [spAutocomplete]="LegalPersonAutocomplete"
+          (blur)="onBlur(legalPerson)"
+          (focus)="onFocus(legalPerson)"
+          (click)="onLegalPersonInputClick()"
+        />
+
+        <sp-autocomplete
+          #LegalPersonAutocomplete="spAutocomplete"
+          [sourceList]="legalPersonList"
+          (selectOption)="selectLegalPerson($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- client -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Клиент</label>
+
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Выберите клиента"
+          class="form-control"
+          formControlName="client"
+          [status]="getClassForControl(client)"
+          [spAutocomplete]="ClientAutocomplete"
+          (blur)="onBlur(client)"
+          (focus)="onFocus(client)"
+          (click)="onClientInputClick()"
+        />
+
+        <sp-autocomplete
+          #ClientAutocomplete="spAutocomplete"
+          [sourceList]="clientList"
+          (selectOption)="selectClient($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+
+    <!-- manager -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Менеджер</label>
+
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Выберите менеджера"
+          class="form-control"
+          formControlName="manager"
+          [status]="getClassForControl(manager)"
+          [spAutocomplete]="ManagerAutocomplete"
+          (blur)="onBlur(manager)"
+          (focus)="onFocus(manager)"
+          (click)="onManagerInputClick()"
+        />
+
+        <sp-autocomplete
+          #ManagerAutocomplete="spAutocomplete"
+          [sourceList]="managerList"
+          (selectOption)="selectManager($event)"
+        ></sp-autocomplete>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- delivery date -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Дата доставки</label>
+
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Выберите дату"
+          class="form-control"
+          formControlName="deliveryDate"
+          [nbDatepicker]="deliveryDatePicker"
+          [status]="getClassForControl(deliveryDate)"
+          (blur)="onBlur(deliveryDate)"
+          (focus)="onFocus(deliveryDate)"
+        />
+
+        <nb-datepicker
+          #deliveryDatePicker
+          [min]="minDeliveryDate"
+          [max]="maxDeliveryDate"
+          (dateChange)="selectDeliveryDate($event)"
+        ></nb-datepicker>
+      </div>
+    </div>
+
+    <!-- delivery address -->
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Адрес доставки</label>
+
+        <div class="form-group">
+          <nb-select
+            *ngIf="addressList"
+            fullWidth
+            placeholder="Выберите адрес"
+            formControlName="address"
+            (click)="onAddressSelectClick()"
+            (selectedChange)="selectAddress($event)"
+            [status]="getClassForControl(address)"
+            (blur)="onBlur(address)"
+            (focus)="onFocus(address)"
+          >
+            <nb-option *ngFor="let addressObj of addressList" [value]="addressObj">
+              {{ addressObj | formatAddress }}
+            </nb-option>
+          </nb-select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- delivery time (min) -->
+    <div class="col-sm-3">
+      <label>Время доставки (C:)</label>
+
+      <div class="form-group">
+        <nb-select
+          fullWidth
+          placeholder="Выберите время"
+          formControlName="deliveryTimeMin"
+          [status]="getClassForRange(deliveryTimeMin)"
+        >
+          <nb-option *ngFor="let hour of hourList" [value]="hour.key">
+            {{ hour.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+    <!-- delivery time (max) -->
+    <div class="col-sm-3">
+      <label>Время доставки (До:)</label>
+
+      <div class="form-group">
+        <nb-select
+          fullWidth
+          placeholder="Выберите время"
+          formControlName="deliveryTimeMax"
+          [status]="getClassForRange(deliveryTimeMax)"
+        >
+          <nb-option *ngFor="let hour of hourList" [value]="hour.key">
+            {{ hour.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+    <!-- payment method -->
+    <div class="col-sm-3">
+      <label>Способ оплаты</label>
+
+      <div class="form-group">
+        <nb-select
+          fullWidth
+          placeholder="Выберите способ оплаты"
+          formControlName="paymentMethod"
+          [status]="getClassForControl(paymentMethod)"
+        >
+          <nb-option *ngFor="let OrderPay of OrderPays" [value]="OrderPay.key">
+            {{ OrderPay.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+    <!-- need documents ? -->
+    <div class="col-sm-3">
+      <label>Документы</label>
+
+      <div class="form-group">
+        <nb-select
+          fullWidth
+          placeholder="Нужны ?"
+          formControlName="needDocuments"
+          [status]="getClassForControl(needDocuments)"
+        >
+          <nb-option *ngFor="let OrderDocument of OrderDocuments" [value]="OrderDocument.key">
+            {{ OrderDocument.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- comment -->
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label>Комментарий</label>
+
+        <textarea
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Напишите комментарий к доставке"
+          class="form-control"
+          formControlName="comment"
+        ></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="!isActionCreate">
+
+    <!-- status -->
+    <div class="col-sm-6">
+      <label>Статус заказа</label>
+
+      <!--
+        filled
+        status="{{ selectedOrderMode }}"
+      -->
+
+      <div class="form-group">
+        <nb-select
+          fullWidth
+          placeholder="Выберите статус"
+          formControlName="status"
+          (selectedChange)="changeOrderState($event)"
+          [status]="getClassForControl(status)"
+          (blur)="onBlur(status)"
+          (focus)="onFocus(status)"
+        >
+          <nb-option *ngFor="let OrderState of OrderStates" [value]="OrderState.key">
+            {{ OrderState.value }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+    <!-- created at -->
+    <div class="col-sm-6">
+      <label>Дата создания заказа</label>
+
+      <input
+        type="text"
+        fullWidth
+        nbInput
+        class="form-control"
+        formControlName="createdAt"
+      />
+    </div>
+
+  </div>
+
+</form>
+
+<hr *ngIf="!isActionDetails"/>
+
+<div *ngIf="!isActionDetails" class="d-flex justify-content-around">
+  <button
+    nbButton
+    ghost
+    status="success"
+    (click)=saveOrderForm()
+    [disabled]="!orderForm.valid">
+      {{ successButtonText }}
+  </button>
+
+  <button
+    nbButton
+    ghost
+    status="danger"
+    (click)=cancel()>
+      Отмена
+  </button>
+</div>

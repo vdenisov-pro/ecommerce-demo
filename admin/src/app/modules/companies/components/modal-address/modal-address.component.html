@@ -1,0 +1,174 @@
+<nb-card size="medium">
+
+  <!-- HEADER -->
+  <nb-card-header>
+    Работа с адресом
+  </nb-card-header>
+
+  <!-- BODY -->
+  <nb-card-body>
+    <form [formGroup]="addressForm" *ngIf="!!addressForm">
+
+      <div class="row">
+
+        <!-- country -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Страна</label>
+
+            <input
+              type="text"
+              nbInput
+              formControlName="country"
+              class="form-control"
+              placeholder="Выберите страну"
+              [status]="getClassForControl(country)"
+              [spAutocomplete]="CountryAutocomplete"
+              (blur)="onBlur(country)"
+              (focus)="onFocus(country)"
+              (click)="onCountryInputClick()"
+            />
+
+            <sp-autocomplete
+              #CountryAutocomplete="spAutocomplete"
+              [sourceList]="countryList"
+              (selectOption)="selectCountry($event)"
+            ></sp-autocomplete>
+          </div>
+        </div>
+
+        <!-- city -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Город</label>
+
+            <input
+              type="text"
+              nbInput
+              formControlName="city"
+              class="form-control"
+              placeholder="Введите назание города"
+              [status]="getClassForControl(city)"
+              (blur)="onBlur(city)"
+              (focus)="onFocus(city)"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <!-- street -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Улица</label>
+
+            <input
+              type="text"
+              nbInput
+              formControlName="street"
+              class="form-control"
+              placeholder="Введите название улицы"
+              [status]="getClassForControl(street)"
+              (blur)="onBlur(street)"
+              (focus)="onFocus(street)"
+            />
+          </div>
+        </div>
+
+        <!-- house -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Дом</label>
+
+            <input
+              type="text"
+              nbInput
+              formControlName="house"
+              class="form-control"
+              placeholder="Введите номер дома"
+              [status]="getClassForControl(house)"
+              (blur)="onBlur(house)"
+              (focus)="onFocus(house)"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Курьер</label>
+
+            <input
+              type="text"
+              nbInput
+              formControlName="courier"
+              class="form-control"
+              placeholder="Выберите курьера для адреса"
+              [status]="getClassForControl(courier)"
+              [spAutocomplete]="CourierAutocomplete"
+              (blur)="onBlur(courier)"
+              (focus)="onFocus(courier)"
+              (click)="onCourierInputClick()"
+            />
+
+            <sp-autocomplete
+              #CourierAutocomplete="spAutocomplete"
+              [sourceList]="courierList"
+              (selectOption)="selectCourier($event)"
+            ></sp-autocomplete>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Комментарий по адресу</label>
+
+            <textarea
+              nbInput
+              fullWidth
+              formControlName="comment"
+              class="form-control"
+              placeholder="Адрес квартиры, корпуса, как пройти или т.п"
+            ></textarea>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </nb-card-body>
+
+  <!-- FOOTER -->
+  <nb-card-footer *ngIf="!isActionDetails">
+    <div class="d-flex justify-content-around">
+
+      <button
+        nbButton
+        ghost
+        status="success"
+        (click)="saveAddressForm()"
+        [disabled]="!addressForm.valid">
+          Добавить
+      </button>
+
+      <button
+        nbButton
+        ghost
+        status="danger"
+        (click)="cancel()">
+          Отмена
+      </button>
+
+    </div>
+  </nb-card-footer>
+
+</nb-card>

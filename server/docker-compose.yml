@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  # API
+  sweetpay_api:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+     - 3000:3000
+     - 7000:7000
+    depends_on:
+      - postgre_db
+    links:
+      - postgre_db
+    environment:
+      - DATABASE_HOST=postgre_db
+
+  # Postgre SQL
+  postgre_db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: 'lgnsxpee'
+      POSTGRES_PASSWORD: 'QqwJA9bW2CT1CyyTkQZoDMglQ-JzRWzo'
+      POSTGRES_DB: 'lgnsxpee'

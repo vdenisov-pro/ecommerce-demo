@@ -1,0 +1,15 @@
+<nb-card
+  [nbSpinner]="!isCouriersLoaded"
+  nbSpinnerStatus="info"
+>
+<sp-smart-table
+  [smartTitle]="tableTitle"
+  [smartColumns]="tableColumns"
+  [smartRows]="courierList"
+
+  (create)="onCreateCourier($event)"
+  (about)="onAboutCourier($event)"
+  (edit)="onUpdateCourier($event)"
+  (delete)="onDeleteCourier($event)"
+></sp-smart-table>
+</nb-card>

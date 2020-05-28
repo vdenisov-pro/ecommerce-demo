@@ -1,0 +1,41 @@
+<nb-card size="medium">
+    <nb-card-header>
+        {{ titleModalCategory }}
+    </nb-card-header>
+
+    <nb-card-body>
+        <form [formGroup]="categoryForm" *ngIf="!!categoryForm">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="inputNameCompany">Название</label>
+                        <input nbInput formControlName="name" type="text" class="form-control" [status]="getClassForControl(name)" (blur)="onBlur(name)" (focus)="onFocus(name)" id="inputNameCompany" placeholder="Введите название для категории...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="inputNameClient">Описание</label>
+                        <textarea nbInput fullWidth formControlName="description" type="text" class="form-control" [status]="getClassForControl(description)" (blur)="onBlur(description)" (focus)="onFocus(description)" id="inputNameClient" placeholder="Подробное описание для категории..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <nb-checkbox formControlName="enabled" [nbTooltip]="tooltipText" nbTooltipTrigger="hover" nbTooltipPlacement="bottom" nbTooltipStatus="info">Категория активна</nb-checkbox>
+
+        </form>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <button nbButton ghost status="danger" (click)="cancel()">Отменить</button>
+            </div>
+            <div class="col-sm-6">
+                <button nbButton outline status="success" (click)="save()" [disabled]="!categoryForm.valid">{{ successButtonText }}</button>
+            </div>
+        </div>
+    </nb-card-footer>
+
+</nb-card>

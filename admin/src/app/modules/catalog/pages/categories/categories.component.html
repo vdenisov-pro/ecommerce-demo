@@ -1,0 +1,56 @@
+<button nbButton size="small" (click)="onCreateCategory($event)">
+    Добавить категорию
+  </button>
+
+<button *ngIf="!!selectedCategory" status="info" ghost nbButton size="tiny" (click)="onUpdateCategory()">
+      Изменить категорию
+  </button>
+
+<button *ngIf="!!selectedCategory && (!selectedCategory.productCounter || selectedCategory.productCounter === 0)" nbButton ghost size="tiny" status="info" (click)="onDeleteCategory()">
+      Удалить категорию
+  </button>
+
+<button *ngIf="!!selectedCategory && !!selectedCategory.productCounter" nbButton ghost size="tiny" status="info" nbTooltip="Эту категорию нельзя удалить, потому что в ней есть продукты" nbTooltipTrigger="hover" nbTooltipStatus="warning">
+      Удалить категорию
+  </button>
+
+<br>
+<br>
+
+<nb-card>
+    <nb-card-body class="categories__card">
+        <nb-tabset class="categories__tabset" #tabs [nbSpinner]="!isCategoriesLoaded" nbSpinnerStatus="info" (changeTab)="onTabSelect($event)" *ngIf="!!categoryList">
+
+            <nb-tab *ngFor="let category of categoryList; trackBy: trackByCategory"
+              [tabTitle]="category.name"
+              [badgeText]="category.productCounter || ''"
+              badgeStatus="info"
+              badgePosition="top right"
+              [active]="selectedCategory?.id === category.id"
+            >
+            </nb-tab>
+        </nb-tabset>
+    </nb-card-body>
+
+
+    <div class="center-center" *ngIf="!!selectedCategory && selectedCategory.productCounter === 0">
+        <span>В эту категорию продукты ещё не завезли </span>
+        <div>
+          <button status="success" nbButton size="tiny" (click)="onCreateProduct($event)">Добавить </button>
+        </div>
+    </div>
+
+
+    <sp-smart-table *ngIf="!!selectedCategory && selectedCategory.productCounter > 0"
+      [nbSpinner]="selectedCategory.productCounter > 0 && !isProductsLoaded"
+      nbSpinnerStatus="info"
+      [smartColumns]="tableColumns"
+      [smartRows]="productList"
+
+      (create)="onCreateProduct($event)"
+      (about)="onAboutProduct($event)"
+      (edit)="onUpdateProduct($event)"
+      (delete)="onDeleteProduct($event)">
+    </sp-smart-table>
+
+</nb-card>

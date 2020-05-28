@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header>
+    Подтверждение действия
+  </nb-card-header>
+
+  <nb-card-body style="font-size: 20px;">
+    Верны ли данные?
+
+    <ul>
+      <li *ngFor="let item of data | keyvalue">
+        <b>{{ item.key }}</b> : {{ item.value }}
+      </li>
+    </ul>
+  </nb-card-body>
+
+  <nb-card-footer style="display: flex; justify-content: space-around;">
+    <button nbButton status="danget" (click)="cancel()">Нет</button>
+    <button nbButton status="success" (click)="submit()">Да</button>
+  </nb-card-footer>
+</nb-card>

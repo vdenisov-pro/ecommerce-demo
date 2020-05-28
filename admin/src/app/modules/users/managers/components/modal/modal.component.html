@@ -1,0 +1,103 @@
+<nb-card size="medium" *ngIf="!!managerForm">
+
+  <!-- HEADER -->
+  <nb-card-header>
+    {{ modalTitle }}
+  </nb-card-header>
+
+  <!-- BODY -->
+  <nb-card-body>
+    <form [formGroup]="managerForm">
+
+      <div class="row">
+
+        <!-- name -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Имя</label>
+            <input type="text" nbInput placeholder="Введите имя пользователя" class="form-control"
+              formControlName="name" [status]="getClassForControl(name)" (blur)="onBlur(name)"
+              (focus)="onFocus(name)" />
+          </div>
+        </div>
+
+        <!-- phone -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Номер телефона</label>
+            <input type="text" nbInput placeholder="Введите номер телефона" class="form-control" formControlName="phone"
+              [status]="getClassForControl(phone)" (blur)="onBlur(phone)" (focus)="onFocus(phone)" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <!-- email -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Адрес почты</label>
+            <input type="text" nbInput placeholder="Введите адрес почты" class="form-control" formControlName="email"
+              [status]="getClassForControl(email)" (blur)="onBlur(email)" (focus)="onFocus(email)" />
+          </div>
+        </div>
+
+        <!-- password -->
+        <div class="col-sm-6">
+          <div *ngIf="action === 'create'" class="form-group">
+            <label>Пароль входа</label>
+            <input type="text" nbInput placeholder="Введите пароль для входа" class="form-control"
+              formControlName="password" [status]="getClassForControl(password)" (blur)="onBlur(password)"
+              (focus)="onFocus(password)" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <!-- description -->
+        <div class="col-12">
+          <div class="form-group">
+            <label>Описание</label>
+            <textarea nbInput fullWidth formControlName="description" class="form-control"
+              placeholder="Дополнительная информация о пользователе">
+            </textarea>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="action === 'update'">
+          <div class="form-group">
+            <button
+              nbButton
+              fullWidth
+              (click)="sendPasswordResetEmail()"
+              [disabled]="resetPasswordButtonDisabled"
+            >
+              Сбросить пароль
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </nb-card-body>
+
+  <!-- FOOTER -->
+  <nb-card-footer *ngIf="action !== 'details'">
+    <div class="d-flex justify-content-around">
+
+      <button nbButton ghost status="success" [disabled]="!managerForm.valid" (click)="saveManagerForm()">
+        {{ successButtonText }}
+      </button>
+
+      <button nbButton ghost status="danger" (click)="cancel()">
+        Отменить
+      </button>
+
+    </div>
+  </nb-card-footer>
+
+</nb-card>

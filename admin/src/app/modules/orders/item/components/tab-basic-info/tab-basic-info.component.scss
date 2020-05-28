@@ -1,0 +1,28 @@
+.center-center {
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  white-space: pre-wrap;
+}
+
+.status {
+  &.new {
+    background: #8BD5FF;
+  }
+  &.verified {
+    background: #ffc0cb;
+  }
+  &.shipped {
+    background: #0500FF;
+  }
+  &.delivering {
+    background: #FFB800;
+  }
+  &.completed{
+    background: #2ED47A;
+  }
+  &.cancelled{
+    background: #EB5757;
+  }
+}

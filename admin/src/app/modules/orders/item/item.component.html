@@ -1,0 +1,27 @@
+<nb-card>
+
+  <nb-card-body>
+    <nb-tabset fullWidth="true">
+
+      <!-- TAB "BASE INFO" -->
+      <nb-tab tabTitle="Основная информация">
+        <sp-order-tab-basic-info
+          [action]="action"
+          [orderId]="orderId"
+
+          (eventCreate)="onCreateOrder($event)"
+        ></sp-order-tab-basic-info>
+      </nb-tab>
+
+      <!-- TAB "POSITIONS" -->      
+      <nb-tab tabTitle="Позиции" [disabled]="!orderId">
+        <sp-order-tab-positions
+          [action]="action"
+          [orderId]="orderId"
+        ></sp-order-tab-positions>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+
+</nb-card>

@@ -1,0 +1,47 @@
+<nb-card>
+
+  <nb-card-header *ngIf="false">
+    {{ modalTitle }}
+  </nb-card-header>
+
+  <nb-card-body>
+    <nb-tabset>
+
+      <nb-tab tabTitle="Основная информация">
+        <sp-companies-tab-basic-info
+          [action]="action"
+          [source]="source"
+          [isActionDetails]="isActionDetails"
+
+          (eventCreate)="createCompany($event)"
+          (eventUpdate)="updateCompany($event)"
+        ></sp-companies-tab-basic-info>
+      </nb-tab>
+
+      <nb-tab tabTitle="Клиенты" *ngIf="isActionDetails">
+        <sp-companies-tab-clients
+          [action]="action"
+          [companyId]="companyId"
+        ></sp-companies-tab-clients>
+      </nb-tab>
+
+      <nb-tab tabTitle="Адреса" [disabled]="!companyId">
+        <sp-companies-tab-addresses
+          [action]="action"
+          [companyId]="companyId"
+          [isActionDetails]="isActionDetails"
+        ></sp-companies-tab-addresses>
+      </nb-tab>
+
+      <nb-tab tabTitle="Юр.лица" [disabled]="!companyId">
+        <sp-companies-tab-legal-people
+          [action]="action"
+          [companyId]="companyId"
+          [isActionDetails]="isActionDetails"
+        ></sp-companies-tab-legal-people>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+
+</nb-card>

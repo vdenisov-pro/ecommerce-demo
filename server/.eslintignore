@@ -1,0 +1,27 @@
+# Logs
+logs
+*.log
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.bash_history
+
+# ... others ...
+.DS_Store
+.config
+package\.json
+package-lock\.json
+/docs/
+/.vscode/
+/.idea/
+
+# Mofied npm package "multer-sharp-s3"
+**/lib/multer-sharp-s3

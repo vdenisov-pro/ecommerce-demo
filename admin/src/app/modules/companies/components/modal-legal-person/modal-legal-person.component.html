@@ -1,0 +1,102 @@
+<nb-card size="medium">
+
+  <!-- HEADER -->
+  <nb-card-header>
+    Работа с юр.лицом
+  </nb-card-header>
+
+  <!-- BODY -->
+  <nb-card-body>
+    <form [formGroup]="personForm" *ngIf="!!personForm">
+
+      <div class="row">
+
+        <!-- name -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Имя юридического лица</label>
+            <input
+              type="text"
+              nbInput
+              formControlName="name"
+              class="form-control"
+              placeholder="Введите имя"
+              [status]="getClassForControl(name)"
+              (blur)="onBlur(name)"
+              (focus)="onFocus(name)"
+            />
+          </div>
+        </div>
+
+        <!-- type -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Тип юридического лица</label>
+            <nb-select
+              class="d-block"
+              formControlName="type"
+              placeholder="Введите тип"
+              [status]="getClassForControl(type)"
+              (blur)="onBlur(type)"
+              (focus)="onFocus(type)"
+            >
+              <nb-option *ngFor="let type of legalPersonTypes" value="{{ type.key }}">
+                {{ type.value }}
+              </nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <!-- requisite -->
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Реквизит</label>
+            <textarea
+              type="text"
+              nbInput
+              fullWidth
+              formControlName="personDetails"
+              class="form-control"
+              placeholder="Введите реквизит"
+              [status]="getClassForControl(personDetails)"
+              (blur)="onBlur(personDetails)"
+              (focus)="onFocus(personDetails)"
+            ></textarea>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </nb-card-body>
+
+  <!-- FOOTER -->
+  <nb-card-footer *ngIf="!isActionDetails">
+    <div class="d-flex justify-content-around">
+
+      <button
+        nbButton
+        ghost
+        status="success"
+        (click)="savePersonForm()"
+        [disabled]="!personForm.valid">
+          <!-- {{ successButtonText }} -->
+          Добавить
+      </button>
+
+      <button
+        nbButton
+        ghost
+        status="danger"
+        (click)="cancel()">
+          Отмена
+      </button>
+
+    </div>
+  </nb-card-footer>
+
+</nb-card>

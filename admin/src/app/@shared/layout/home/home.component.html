@@ -1,0 +1,30 @@
+<div *ngIf="user$ | async; let user; else loading">
+  <p>Welcome back, friend.</p>
+  <p>Your name is: {{ user.displayName || "null" }}</p>
+  <p>Your email is: {{ user.email }}</p>
+
+  <!-- delete style please -->
+  <button type="button" (click)="onLogout()"
+    style="margin: 10px; background-color: #43c70b; color: #ffffff; padding: 5px 10px;"
+  >
+    Sign Out
+  </button>
+</div>
+
+<ng-template #loading>
+  <p>Please login, friend.</p>
+
+  <!-- delete style please -->
+  <button type="button" (click)="goToAuthForm()"
+    style="margin: 10px; background-color: #43c70b; color: #ffffff; padding: 5px 10px;"
+  >
+    Go to login
+  </button>
+</ng-template>
+
+<hr>
+
+<p>
+  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam sit ipsa quisquam, dolorem labore repudiandae cupiditate dolorum odio ex natus rerum, soluta quidem optio nostrum quos corporis eveniet sunt aspernatur?
+</p>
+

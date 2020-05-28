@@ -1,0 +1,19 @@
+<nb-card>
+
+  <nb-card-header *ngIf="!!smartTitle">
+    {{ smartTitle }}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="smartSettings"
+      [source]="smartRows"
+
+      (create)="onCreate($event)"
+      (custom)="onCustomAction($event)"
+      (userRowSelect)="openDetails($event)"
+
+    ></ng2-smart-table>
+  </nb-card-body>
+
+</nb-card>

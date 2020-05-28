@@ -1,0 +1,23 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules",
+    "db",
+    "test",
+    "app/components/**/*.test.js"
+  ],
+  "execMap": {
+    "node": "node"
+  },
+  "events": {
+    "crash": "kill -9 $(lsof -t -i :3000)"
+  },
+  "watch": [
+    "config/*.json",
+    "bin/**/*.js",
+    "app/**/*.js",
+    "lib/**/*.js"
+  ],
+  "ext": "js json"
+}
